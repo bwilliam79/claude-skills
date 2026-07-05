@@ -93,7 +93,7 @@ if [ -n "$FIVE" ]; then
   line="$line${SEP}${WHITE}5h Limit: ${RST}$(tint "$FIVE")${FIVE}%${RST}"
   if [ -n "$FIVE_RESET" ]; then
     RESET_FMT=$(date -r "$FIVE_RESET" "+%-I:%M%p" 2>/dev/null | tr '[:upper:]' '[:lower:]')
-    [ -n "$RESET_FMT" ] && line="$line ${WHITE}-${RST} ${LBLUE}${RESET_FMT}${RST}"
+    [ -n "$RESET_FMT" ] && line="$line ${GRAY}(resets ${LBLUE}${RESET_FMT}${GRAY})${RST}"
   fi
 fi
 if [ -n "$WEEK" ]; then
@@ -101,7 +101,7 @@ if [ -n "$WEEK" ]; then
   if [ -n "$WEEK_RESET" ]; then
     WEEK_RAW=$(date -r "$WEEK_RESET" "+%a %-I:%M%p" 2>/dev/null)
     [ -n "$WEEK_RAW" ] && WEEK_FMT="${WEEK_RAW%??}$(echo "${WEEK_RAW#"${WEEK_RAW%??}"}" | tr '[:upper:]' '[:lower:]')"
-    [ -n "$WEEK_FMT" ] && line="$line ${WHITE}-${RST} ${LBLUE}${WEEK_FMT}${RST}"
+    [ -n "$WEEK_FMT" ] && line="$line ${GRAY}(resets ${LBLUE}${WEEK_FMT}${GRAY})${RST}"
   fi
 fi
 

@@ -29,8 +29,8 @@ A Claude Code `statusLine` command that does two things on every refresh:
    Plain-text equivalent (colors won't render here, but this is the exact layout):
 
    ```
-   [ Sonnet 5 : high ] | ~/github | Context: 41% | 5h Limit: 62% - 5:10pm | Weekly Limit: 60% - Sun 12:59am
-   [ Fable 5 : max ] | ~/github | Context: 92% | 5h Limit: 95% - 5:10pm | Weekly Limit: 90% - Sun 12:59am
+   [ Sonnet 5 : high ] | ~/github | Context: 41% | 5h Limit: 62% (resets 5:10pm) | Weekly Limit: 60% (resets Sun 12:59am)
+   [ Fable 5 : max ] | ~/github | Context: 92% | 5h Limit: 95% (resets 5:10pm) | Weekly Limit: 90% (resets Sun 12:59am)
    ```
 
    | Field | Meaning |
@@ -40,8 +40,8 @@ A Claude Code `statusLine` command that does two things on every refresh:
    | Directory | Fixed cyan, no semantic meaning. |
    | `Context:` / `5h Limit:` / `Weekly Limit:` | Label is fixed white; the percentage after it is colored green (&lt;60%) → yellow (60–79%) → orange (80–89%) → bright red (≥90%). |
    | Reset times | Fixed periwinkle (`#8f69ff`), no semantic meaning. |
-   | Brackets, model-effort colon, `%`-to-reset-time hyphen | Fixed white — structural, never carries a signal. |
-   | `\|` separators | Fixed gray — pure structure, never carries a signal. |
+   | Brackets, model-effort colon | Fixed white — structural, never carries a signal. |
+   | `\|` separators, `(resets …)` wrapper | Fixed gray — pure structure, never carries a signal. |
 
    Bold is reserved exclusively for the ombré (max effort, or the priciest model tier) — everything else is a flat color, so the loudest state on the line is unambiguous.
 
