@@ -29,6 +29,7 @@ WEEK=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty' |
 WEEK_RESET=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')
 
 GRAY=$'\033[90m'; CYAN=$'\033[36m'; LBLUE=$'\033[94m'; ROSE=$'\033[38;5;211m'; RST=$'\033[0m'
+WHITE=$'\033[97m'
 GRN=$'\033[32m'; YEL=$'\033[33m'; ORG=$'\033[38;5;208m'; XRED=$'\033[38;5;196m'
 SEP="${GRAY} | ${RST}"
 
@@ -84,19 +85,19 @@ model_render() {
   esac
 }
 
-line="${GRAY}[${RST}$(model_render "$MODEL")"
-[ -n "$EFFORT" ] && line="$line${GRAY}:${RST}$(effort_render "$EFFORT")"
-line="$line${GRAY}]${RST} ${CYAN}${DIR}${RST}"
-[ -n "$CTX" ] && line="$line${SEP}$(tint "$CTX")ctx ${CTX}%${RST}"
+line="${WHITE}[ ${RST}$(model_render "$MODEL")"
+[ -n "$EFFORT" ] && line="$line${WHITE} : ${RST}$(effort_render "$EFFORT")"
+line="$line${WHITE} ]${RST}${SEP}${CYAN}${DIR}${RST}"
+[ -n "$CTX" ] && line="$line${SEP}${WHITE}Context: ${RST}$(tint "$CTX")${CTX}%${RST}"
 if [ -n "$FIVE" ]; then
-  line="$line${SEP}$(tint "$FIVE")5h ${FIVE}%${RST}"
+  line="$line${SEP}${WHITE}5h Limit: ${RST}$(tint "$FIVE")${FIVE}%${RST}"
   if [ -n "$FIVE_RESET" ]; then
     RESET_FMT=$(date -r "$FIVE_RESET" "+%-I:%M%p" 2>/dev/null | tr '[:upper:]' '[:lower:]')
     [ -n "$RESET_FMT" ] && line="$line ${GRAY}→${RST} ${LBLUE}${RESET_FMT}${RST}"
   fi
 fi
 if [ -n "$WEEK" ]; then
-  line="$line${SEP}$(tint "$WEEK")7d ${WEEK}%${RST}"
+  line="$line${SEP}${WHITE}Weekly Limit: ${RST}$(tint "$WEEK")${WEEK}%${RST}"
   if [ -n "$WEEK_RESET" ]; then
     WEEK_RAW=$(date -r "$WEEK_RESET" "+%a %-I:%M%p" 2>/dev/null)
     [ -n "$WEEK_RAW" ] && WEEK_FMT="${WEEK_RAW%??}$(echo "${WEEK_RAW#"${WEEK_RAW%??}"}" | tr '[:upper:]' '[:lower:]')"
