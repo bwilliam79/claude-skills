@@ -28,7 +28,7 @@ FIVE_RESET=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
 WEEK=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty' | cut -d. -f1)
 WEEK_RESET=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')
 
-GRAY=$'\033[90m'; CYAN=$'\033[36m'; LBLUE=$'\033[94m'; ROSE=$'\033[38;5;211m'; RST=$'\033[0m'
+GRAY=$'\033[90m'; CYAN=$'\033[36m'; LBLUE=$'\033[38;2;143;105;255m'; ROSE=$'\033[38;5;211m'; RST=$'\033[0m'
 WHITE=$'\033[97m'
 GRN=$'\033[32m'; YEL=$'\033[33m'; ORG=$'\033[38;5;208m'; XRED=$'\033[38;5;196m'
 SEP="${GRAY} | ${RST}"

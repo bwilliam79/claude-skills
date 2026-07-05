@@ -39,7 +39,7 @@ A Claude Code `statusLine` command that does two things on every refresh:
    | Effort tag | Same idea, keyed to reasoning effort — green (low) → yellow (medium) → orange (high) → bright red (xhigh) → the ombré (max). |
    | Directory | Fixed cyan, no semantic meaning. |
    | `Context:` / `5h Limit:` / `Weekly Limit:` | Label is fixed white; the percentage after it is colored green (&lt;60%) → yellow (60–79%) → orange (80–89%) → bright red (≥90%). |
-   | Reset times | Fixed light blue, no semantic meaning. |
+   | Reset times | Fixed periwinkle (`#8f69ff`), no semantic meaning. |
    | Brackets, model-effort colon, `%`-to-reset-time hyphen | Fixed white — structural, never carries a signal. |
    | `\|` separators | Fixed gray — pure structure, never carries a signal. |
 
