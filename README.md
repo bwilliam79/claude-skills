@@ -22,8 +22,13 @@ A Claude Code `statusLine` command that does two things on every refresh:
 1. **Persists rate-limit data** — writes the 5-hour and 7-day reset timestamps to `~/.claude/state/rate-limit-resets.json`, which `session-auto-resume` depends on. Limits are account-wide, so any session's statusline keeps this fresh for every session.
 2. **Renders a colored status line**, e.g.:
 
+   <img src="docs/statusline-example.svg" alt="Statusline examples: a normal Sonnet/high-effort state with green/yellow usage, and a loud Fable/max-effort state with red usage" width="640">
+
+   Plain-text equivalent (colors won't render here, but this is the exact layout):
+
    ```
-   [Sonnet 5:high] ~/github | ctx 41% | 5h 62% → 5:10pm | 7d 60% → Thu 12:09am
+   [ Sonnet 5 : high ] | ~/github | Context: 41% | 5h Limit: 62% → 5:10pm | Weekly Limit: 60% → Thu 12:09am
+   [ Fable 5 : max ] | ~/github | Context: 92% | 5h Limit: 95% → 5:10pm | Weekly Limit: 90% → Thu 12:09am
    ```
 
    | Field | Meaning |
@@ -31,9 +36,10 @@ A Claude Code `statusLine` command that does two things on every refresh:
    | Model name | Colored by cost tier — green (Haiku) → yellow (Sonnet) → orange (Opus) → a bold dark-red-to-bright-yellow **ombré** across the letters (Fable/Mythos). Unrecognized models fall back to rose. |
    | Effort tag | Same idea, keyed to reasoning effort — green (low) → yellow (medium) → orange (high) → bright red (xhigh) → the ombré (max). |
    | Directory | Fixed cyan, no semantic meaning. |
-   | `ctx` / `5h` / `7d` | Percentage used, colored green (&lt;60%) → yellow (60–79%) → orange (80–89%) → bright red (≥90%). |
+   | `Context:` / `5h Limit:` / `Weekly Limit:` | Label is fixed white; the percentage after it is colored green (&lt;60%) → yellow (60–79%) → orange (80–89%) → bright red (≥90%). |
    | Reset times | Fixed light blue, no semantic meaning. |
-   | Brackets / separators / arrows | Fixed gray — pure structure, never carries a signal. |
+   | Brackets / colon between model and effort | Fixed white — structural, never carries a signal. |
+   | `\|` separators / `→` arrows | Fixed gray — pure structure, never carries a signal. |
 
    Bold is reserved exclusively for the ombré (max effort, or the priciest model tier) — everything else is a flat color, so the loudest state on the line is unambiguous.
 
